@@ -1,0 +1,558 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #2a1570;
+  --color-brand-primary-dark: #1d0f50;
+  --color-brand-primary-light: #3a2884;
+  --color-brand-secondary: #017cc3;
+  --color-brand-secondary-hover: #0169a6;
+  --color-brand-support: #dbffff;
+  --color-brand-border: #e6e3f1;
+  --color-brand-muted: #eef0f7;
+  --color-brand-text: #4a4566;
+
+  --color-care-primary: #0d9488;
+  --color-care-hover: #0f766e;
+  --color-care-strong: #006854;
+  --color-care-container: #008378;
+  --color-care-fixed: #89f5e7;
+  --color-care-fixed-dim: #6bd8cb;
+  --color-care-ink: #0b2b28;
+  --color-care-mist: #effbf9;
+
+  --font-sans: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --grad-brand: linear-gradient(135deg, #2a1570 0%, #017cc3 100%);
+  --grad-deep: linear-gradient(160deg, #1d0f50 0%, #2a1570 55%, #017cc3 100%);
+  --grad-sky: linear-gradient(180deg, #dbffff 0%, #ffffff 100%);
+  --grad-mist: linear-gradient(135deg, #dbffff 0%, #eef0f7 100%);
+  --grad-text: linear-gradient(90deg, #2a1570 0%, #017cc3 100%);
+  --ease-apple: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@layer base {
+  html {
+    font-size: 15px;
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-brand-text);
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  section[id] {
+    scroll-margin-top: 68px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-secondary);
+    outline-offset: 2px;
+  }
+}
+
+/* Gradient Utility Classes */
+.bg-grad-brand {
+  background-image: var(--grad-brand);
+}
+
+.bg-grad-deep {
+  background-image: var(--grad-deep);
+}
+
+.bg-grad-sky {
+  background-image: var(--grad-sky);
+}
+
+.bg-grad-mist {
+  background-image: var(--grad-mist);
+}
+
+.bg-care-mesh {
+  background-color: #006854;
+  background-image:
+    radial-gradient(ellipse 55% 45% at 95% 0%, rgba(107, 216, 203, 0.55) 0%, rgba(107, 216, 203, 0) 70%),
+    radial-gradient(ellipse 70% 60% at 65% 30%, rgba(13, 148, 136, 0.75) 0%, rgba(13, 148, 136, 0) 70%),
+    radial-gradient(ellipse 80% 70% at 0% 95%, rgba(0, 104, 84, 1) 0%, rgba(0, 104, 84, 0) 70%),
+    linear-gradient(160deg, #0f766e 0%, #006854 100%);
+}
+
+.shadow-care-hover {
+  box-shadow: 0 24px 48px rgba(0, 104, 84, 0.35);
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.text-grad-brand {
+  background-image: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Layered Apple/Material Shadows */
+.shadow-apple-soft {
+  box-shadow: 0 1px 2px rgba(29, 15, 80, 0.06), 0 12px 32px rgba(29, 15, 80, 0.08);
+}
+
+.shadow-apple-hover {
+  box-shadow: 0 2px 4px rgba(29, 15, 80, 0.08), 0 20px 48px rgba(29, 15, 80, 0.16);
+}
+
+.shadow-apple-showcase {
+  box-shadow: 0 40px 80px rgba(29, 15, 80, 0.25);
+}
+
+.shadow-apple-dropdown {
+  box-shadow: 0 20px 48px rgba(29, 15, 80, 0.18);
+}
+
+/* Button Layer State */
+.btn-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #017cc3;
+  color: #ffffff;
+  font-weight: 700;
+  transition: all 0.25s var(--ease-apple);
+}
+
+.btn-pill-primary:hover {
+  background-image: var(--grad-brand);
+  transform: translateY(-1px);
+}
+
+.btn-pill-primary:active {
+  transform: scale(0.98);
+}
+
+/* Accordion Smooth Height Transition */
+.faq-grid-transition {
+  display: grid;
+  transition: grid-template-rows 0.3s var(--ease-apple);
+}
+
+/* Hero Orbit Tracks Keyframes & Responsive Rules */
+@keyframes heroOrbitsDrift {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(6deg);
+  }
+}
+
+.animate-orbits-drift {
+  transform-origin: 50% 42.5%;
+  animation: heroOrbitsDrift 30s ease-in-out infinite alternate;
+}
+
+@keyframes orbitTrackA {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -3490px;
+    opacity: 0;
+  }
+}
+
+@keyframes orbitTrackB {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    stroke-dashoffset: 3840px;
+    opacity: 0;
+  }
+}
+
+@keyframes orbitTrackC {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -3180px;
+    opacity: 0;
+  }
+}
+
+@keyframes orbitTrackD {
+  0% {
+    stroke-dashoffset: -630px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -4120px;
+    opacity: 0;
+  }
+}
+
+.anim-orbit-a {
+  animation: orbitTrackA 9s linear infinite;
+}
+
+.anim-orbit-b {
+  animation: orbitTrackB 12s linear infinite 2s;
+}
+
+.anim-orbit-c {
+  animation: orbitTrackC 14s linear infinite 4s;
+}
+
+.anim-orbit-d {
+  animation: orbitTrackD 9s linear infinite;
+}
+
+/* Tablet adjustments (<1200px) */
+@media (max-width: 1199px) {
+  .hero-orbits-group {
+    transform: scale(0.85);
+    transform-origin: 720px 340px;
+  }
+  .track-stroke-a {
+    stroke-width: 3.5px !important;
+  }
+  .track-stroke-b {
+    stroke-width: 2.1px !important;
+  }
+  .track-stroke-c {
+    stroke-width: 1.75px !important;
+  }
+  .track-stroke-d {
+    stroke-width: 1.4px !important;
+  }
+}
+
+/* Mobile adjustments (<960px) */
+@media (max-width: 959px) {
+  .hero-orbits-group {
+    transform: scale(0.72);
+    transform-origin: 720px 340px;
+  }
+  .anim-orbit-a {
+    animation-name: orbitTrackA-mobile;
+  }
+  .anim-orbit-d {
+    animation-name: orbitTrackD-mobile;
+  }
+}
+
+@keyframes orbitTrackA-mobile {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    stroke-dashoffset: -3490px;
+    opacity: 0;
+  }
+}
+
+@keyframes orbitTrackD-mobile {
+  0% {
+    stroke-dashoffset: -630px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    stroke-dashoffset: -4120px;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orbits-container {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   REUSABLE CTA BUTTONS & HERO CHIPS
+   ========================================================================== */
+
+/* Keyframe for flowing gradient on primary button */
+@keyframes ctaGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* 1. Primary Button */
+.cta-btn-primary {
+  position: relative;
+  background-color: #017cc3;
+  background-image: linear-gradient(110deg, #017cc3 0%, #2a1570 50%, #017cc3 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(1, 124, 195, 0.28);
+  overflow: hidden;
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 250ms cubic-bezier(0.2, 0, 0, 1),
+              background-position 600ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.cta-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(42, 21, 112, 0.32);
+  background-position: 100% 0%;
+  animation: ctaGradientFlow 3s ease-in-out infinite alternate 600ms;
+}
+
+.cta-btn-primary:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 4px 12px rgba(1, 124, 195, 0.24);
+}
+
+/* Shine beam pseudo-element for primary & onDark */
+.cta-shine-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  transform: translateX(-130%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cta-btn-primary:hover .cta-shine-layer,
+.cta-btn-ondark:hover .cta-shine-layer {
+  transform: translateX(130%);
+  transition: transform 700ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* 2. Secondary Button ("Jadwalkan Demo" in Hero) */
+.cta-btn-secondary {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #e6e3f1;
+  color: #2a1570;
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 250ms cubic-bezier(0.2, 0, 0, 1),
+              background 250ms cubic-bezier(0.2, 0, 0, 1),
+              border-color 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.cta-btn-secondary:hover {
+  background:
+    linear-gradient(#f5fdff, #f5fdff) padding-box,
+    linear-gradient(110deg, #2a1570, #017cc3) border-box;
+  border: 1.5px solid transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(42, 21, 112, 0.12);
+}
+
+.cta-btn-secondary:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* 3. onDark Button (CTA Section Primary) */
+.cta-btn-ondark {
+  position: relative;
+  background: #ffffff;
+  color: #2a1570;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 250ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 250ms cubic-bezier(0.2, 0, 0, 1),
+              background 250ms cubic-bezier(0.2, 0, 0, 1),
+              color 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.cta-btn-ondark:hover {
+  background: linear-gradient(110deg, #ffffff 0%, #dbffff 100%);
+  color: #017cc3;
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 6px rgba(219, 255, 255, 0.18), 0 14px 32px rgba(29, 15, 80, 0.28);
+}
+
+.cta-btn-ondark:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: 0 0 0 3px rgba(219, 255, 255, 0.15);
+}
+
+/* 4. outlineOnDark Button (CTA Section Secondary) */
+.cta-btn-outline-ondark {
+  position: relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  overflow: hidden;
+  color: #ffffff;
+  transition: border-color 250ms cubic-bezier(0.2, 0, 0, 1),
+              transform 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.cta-btn-outline-ondark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 350ms cubic-bezier(0.2, 0, 0, 1);
+  border-radius: 9999px;
+  z-index: 0;
+}
+
+.cta-btn-outline-ondark:hover::before {
+  transform: scaleX(1);
+}
+
+.cta-btn-outline-ondark:hover {
+  border-color: #dbffff;
+  transform: translateY(-2px);
+}
+
+.cta-btn-outline-ondark:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* 5. Hero Service Chips with dual-gradient border on hover */
+.hero-service-chip {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e6e3f1;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 200ms cubic-bezier(0.2, 0, 0, 1),
+              background 200ms cubic-bezier(0.2, 0, 0, 1),
+              border-color 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.hero-service-chip:hover {
+  background:
+    linear-gradient(#f8faff, #f8faff) padding-box,
+    linear-gradient(110deg, #2a1570, #017cc3) border-box;
+  border: 1px solid transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(42, 21, 112, 0.08);
+}
+
+.hero-service-chip-care:hover {
+  background:
+    linear-gradient(#effbf9, #effbf9) padding-box,
+    linear-gradient(110deg, #0f766e, #6bd8cb) border-box;
+  border: 1px solid transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.12);
+}
+
+@keyframes flowParticle {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.animate-flow-particle {
+  animation: flowParticle 4s linear infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 3s ease-out infinite;
+}
+
+.animate-pulse-ring-delayed {
+  animation: pulseRing 3s ease-out 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-flow-particle,
+  .animate-pulse-ring,
+  .animate-pulse-ring-delayed {
+    display: none !important;
+    animation: none !important;
+  }
+  .cta-btn-primary,
+  .cta-btn-secondary,
+  .cta-btn-ondark,
+  .cta-btn-outline-ondark,
+  .hero-service-chip,
+  .hero-service-chip-care {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .cta-shine-layer,
+  .cta-btn-outline-ondark::before {
+    display: none !important;
+  }
+}

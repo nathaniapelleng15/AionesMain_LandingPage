@@ -1,0 +1,6 @@
+{
+  "name": "AIONES — Ekosistem AI untuk BUMD",
+  "description": "Portal utama dan ekosistem AI untuk Badan Usaha Milik Daerah (BUMD) yang menaungi AionesCare, AionesContent, AionesDocu, dan AionesBoard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
